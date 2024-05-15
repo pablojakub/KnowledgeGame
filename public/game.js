@@ -17,7 +17,22 @@ robot_moving.src = './move.png';
 const robot_jumping = new Image();
 robot_jumping.src = './jump.png';
 
-const robot = new Character(robot_idle, {x: 500, y: 485});
+const initialRobotYPosition = 550;
+const robot = new Character(robot_idle, {x: 500, y: initialRobotYPosition});
+
+const answerYPosition = 120;
+const answerA = new Image();
+answerA.src = './AnswerA.png';
+
+const answerB = new Image();
+answerB.src = './AnswerB.png';
+
+const answerC = new Image();
+answerC.src = './AnswerC.png';
+
+const answerD = new Image();
+answerD.src = './AnswerD.png';
+
 
 const changeQuestionButton = {
     x: 1030,
@@ -56,21 +71,25 @@ canvas.addEventListener('mousemove', (event) => {
 });
 
 window.addEventListener('keydown', (event) => {
-    if (event.key === 'a') {
+    if (event.key === 'a' && robot.state !== 'jumpUp') {
         robot.move(robot_moving, false);
     }
 
-    if (event.key === 'd') {
+    if (event.key === 'd' && robot.state !== 'jumpUp') {
         robot.move(robot_moving, true);
     }
 
     if (event.key === 'w' && robot.state === 'idle') {
-        robot.state === 'jump';
+        robot.state = 'jumpUp';
     }
 });
 
 window.addEventListener('keyup', (event) => {
-    robot.idle(robot_idle, 485);
+    if (event.key === 'w' && robot.state !== 'moving') {
+        robot.state = 'jumpDown';
+    } else {
+        robot.idle(robot_idle, initialRobotYPosition);
+    }
 });
 
 const getQuestions = async () => {
@@ -95,6 +114,11 @@ const showQuestion = async () => {
     ctx.fillStyle = '#ece9f3';
     const question = questions[currentQuestionNumber];
     ctx.fillText(question.questionBody, 30, 770);
+
+    ctx.font = '16px Arial';
+    ctx.fillStyle = '#ece9f3';
+    const firstAnswer = questions[currentQuestionNumber].A;
+    ctx.fillText(firstAnswer, 80, answerYPosition - 20);
 
 };
 
@@ -124,29 +148,39 @@ function changeQuestion() {
 function showAndAnimateRobot() {
     clearCanvas(true);
     ctx.drawImage(image_background, 0, 0);
+    ctx.drawImage(answerA, 100, answerYPosition);
+    ctx.drawImage(answerB, 400, answerYPosition);
+    ctx.drawImage(answerC, 700, answerYPosition);
+    ctx.drawImage(answerD, 1000, answerYPosition);
     robot.draw();
+    console.log(robot.state);
     showQuestion();
     attachChangeButton();
     if (robot.state === 'idle') {
-        console.log(robot.position.y);
         robot.position.y += robot.animationMoveSpeed;
-        if (robot.position.y >= 490) {
+        if (robot.position.y >= initialRobotYPosition + 20) {
             robot.animationMoveSpeed = -robot.animationMoveSpeed;
         }
 
-        if (robot.position.y <= 470) {
+        if (robot.position.y <= initialRobotYPosition - 20) {
             robot.animationMoveSpeed = -robot.animationMoveSpeed;
         }
     }
 
-    if (robot.state === 'jump') {
-        robot.jump(robot_jumping);
+    if (robot.state === 'jumpUp') {
+        robot.jump(robot_jumping, true, robot_idle);
+    }
+
+    if (robot.state === 'jumpDown') {
+        robot.jump(robot_jumping, false, robot_idle);
     }
 
     setTimeout(() => {
         requestAnimationFrame(showAndAnimateRobot);
     }, 1000 / robot.frame);
 }
+console.log('🚀 ~ showAndAnimateRobot ~ robot:', robot);
+console.log('🚀 ~ showAndAnimateRobot ~ robot:', robot);
 
 getQuestions();
 showAndAnimateRobot();
