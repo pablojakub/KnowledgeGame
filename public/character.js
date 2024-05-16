@@ -40,8 +40,7 @@ class Character {
 
     move(image, toRight) {
         this.image = image;
-        this.state = 'moving';
-        this.frame = 100;
+        this.frame = 40;
         if (toRight && this.position.x < canvas.width - 125) {
             this.position.x += 16;
         } else if (toRight === false && this.position.x > 0) {
@@ -57,6 +56,21 @@ class Character {
 
         if (positionY) {
             this.position.y = positionY;
+        }
+    }
+
+    shoot(missiles, robot_idle) {
+        this.frame = 100;
+        missiles.forEach(missile => {
+            missile.fire(this.position.x, this.position.y);
+
+            if (missile.position.y < 0) {
+                missiles.shift();
+            }
+        });
+
+        if (missiles.length === 0) {
+            this.idle(robot_idle);
         }
     }
 }

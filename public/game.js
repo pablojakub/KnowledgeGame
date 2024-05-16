@@ -33,6 +33,9 @@ answerC.src = './AnswerC.png';
 const answerD = new Image();
 answerD.src = './AnswerD.png';
 
+const missileImage = new Image();
+missileImage.src = './missile.png';
+const missiles = [];
 
 const changeQuestionButton = {
     x: 1030,
@@ -40,8 +43,6 @@ const changeQuestionButton = {
     width: 120,
     height: 50,
 };
-
-let key_w_pressed = false;
 
 const cursor = {
     x: 0,
@@ -71,23 +72,36 @@ canvas.addEventListener('mousemove', (event) => {
 });
 
 window.addEventListener('keydown', (event) => {
-    if (event.key === 'a' && robot.state !== 'jumpUp') {
-        robot.move(robot_moving, false);
+    const canMoving = robot.state === 'idle' || robot.state === 'movingLeft' || robot.state === 'movingRight';
+
+    if (event.key === 'a' && canMoving) {
+        robot.state = 'movingLeft';
     }
 
-    if (event.key === 'd' && robot.state !== 'jumpUp') {
-        robot.move(robot_moving, true);
+    if (event.key === 'd' && canMoving) {
+        robot.state = 'movingRight';
     }
 
-    if (event.key === 'w' && robot.state === 'idle') {
+    if (event.key === 'w' && canMoving) {
         robot.state = 'jumpUp';
+    }
+
+    if (event.key === 'f' && robot.state !== 'jumpUp') {
+        missiles.push(new Missile(missileImage));
+        robot.state = 'firing';
     }
 });
 
 window.addEventListener('keyup', (event) => {
     if (event.key === 'w' && robot.state !== 'moving') {
         robot.state = 'jumpDown';
-    } else {
+    }
+
+    if (event.key === 'd') {
+        robot.idle(robot_idle, initialRobotYPosition);
+    }
+
+    if (event.key === 'a') {
         robot.idle(robot_idle, initialRobotYPosition);
     }
 });
@@ -115,11 +129,7 @@ const showQuestion = async () => {
     const question = questions[currentQuestionNumber];
     ctx.fillText(question.questionBody, 30, 770);
 
-    ctx.font = '16px Arial';
-    ctx.fillStyle = '#ece9f3';
-    const firstAnswer = questions[currentQuestionNumber].A;
-    ctx.fillText(firstAnswer, 80, answerYPosition - 20);
-
+    attachAnswers(question);
 };
 
 function changeQuestion() {
@@ -153,7 +163,6 @@ function showAndAnimateRobot() {
     ctx.drawImage(answerC, 700, answerYPosition);
     ctx.drawImage(answerD, 1000, answerYPosition);
     robot.draw();
-    console.log(robot.state);
     showQuestion();
     attachChangeButton();
     if (robot.state === 'idle') {
@@ -175,12 +184,22 @@ function showAndAnimateRobot() {
         robot.jump(robot_jumping, false, robot_idle);
     }
 
+    if (robot.state === 'firing') {
+        robot.shoot(missiles, robot_idle);
+    }
+
+    if (robot.state === 'movingRight') {
+        robot.move(robot_moving, true);
+    }
+
+    if (robot.state === 'movingLeft') {
+        robot.move(robot_moving, false);
+    }
+
     setTimeout(() => {
         requestAnimationFrame(showAndAnimateRobot);
     }, 1000 / robot.frame);
 }
-console.log('🚀 ~ showAndAnimateRobot ~ robot:', robot);
-console.log('🚀 ~ showAndAnimateRobot ~ robot:', robot);
 
 getQuestions();
 showAndAnimateRobot();
@@ -219,5 +238,57 @@ function showFirstQuestion() {
     questionsAsked.push(questionNumber);
     const question = questions[questionNumber];
     ctx.fillText(question.questionBody, 30, 770);
+}
+
+function attachAnswers(question) {
+    ctx.font = '16px Arial';
+    ctx.fillStyle = '#ece9f3';
+    const firstAnswer = question.A;
+    if (answerIsLongerThanOneLine(firstAnswer)) {
+        splitAnswer(firstAnswer, 80, answerYPosition - 20);
+    } else {
+        ctx.fillText(firstAnswer, 80, answerYPosition - 20);
+    }
+
+    const secondAnswer = question.B;
+    if (answerIsLongerThanOneLine(secondAnswer)) {
+        splitAnswer(secondAnswer, 380, answerYPosition - 20);
+    } else {
+        ctx.fillText(secondAnswer, 380, answerYPosition - 20);
+    }
+
+    const thirdAnswer = question.C;
+    if (answerIsLongerThanOneLine(thirdAnswer)) {
+        splitAnswer(thirdAnswer, 680, answerYPosition - 20);
+    } else {
+        ctx.fillText(thirdAnswer, 680, answerYPosition - 20);
+    }
+
+    const fourthAnswer = question.D;
+    if (answerIsLongerThanOneLine(fourthAnswer)) {
+        splitAnswer(fourthAnswer, 980, answerYPosition - 20);
+    } else {
+        ctx.fillText(fourthAnswer, 980, answerYPosition - 20);
+    }
+}
+
+function answerIsLongerThanOneLine(answer) {
+    return answer.length > 27;
+}
+
+function splitAnswer(answer, xPos, yPos) {
+    if (answer.length < 54) {
+        const firstPart = answer.slice(0, 27);
+        const secondPart = answer.slice(27, answer.length);
+        ctx.fillText(`${firstPart}-`, xPos, yPos - 20);
+        ctx.fillText(secondPart, xPos, yPos);
+    } else {
+        const firstPart = answer.slice(0, 27);
+        const secondPart = answer.slice(27, 48);
+        const thirdPart = answer.slice(54, answer.length);
+        ctx.fillText(`${firstPart}-`, xPos, yPos - 40);
+        ctx.fillText(`${secondPart}-`, xPos, yPos - 20);
+        ctx.fillText(thirdPart, xPos, yPos);
+    }
 }
 
