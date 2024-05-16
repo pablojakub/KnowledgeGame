@@ -18,7 +18,11 @@ const robot_jumping = new Image();
 robot_jumping.src = './jump.png';
 
 const initialRobotYPosition = 550;
-const robot = new Character(robot_idle, {x: 500, y: initialRobotYPosition});
+const robot = new Character(robot_idle, {x: 500, y: initialRobotYPosition}, {
+    idle: robot_idle,
+    moving: robot_moving,
+    jumping: robot_jumping,
+});
 
 const answerYPosition = 120;
 const answerA = new Image();
@@ -97,12 +101,12 @@ window.addEventListener('keyup', (event) => {
         robot.state = 'jumpDown';
     }
 
-    if (event.key === 'd') {
-        robot.idle(robot_idle, initialRobotYPosition);
+    if (event.key === 'd' && robot.state !== 'firing') {
+        robot.idle(initialRobotYPosition);
     }
 
-    if (event.key === 'a') {
-        robot.idle(robot_idle, initialRobotYPosition);
+    if (event.key === 'a' && robot.state !== 'firing') {
+        robot.idle(initialRobotYPosition);
     }
 });
 
@@ -177,23 +181,23 @@ function showAndAnimateRobot() {
     }
 
     if (robot.state === 'jumpUp') {
-        robot.jump(robot_jumping, true, robot_idle);
+        robot.jump(true);
     }
 
     if (robot.state === 'jumpDown') {
-        robot.jump(robot_jumping, false, robot_idle);
+        robot.jump(false);
     }
 
     if (robot.state === 'firing') {
-        robot.shoot(missiles, robot_idle);
+        robot.shoot(missiles);
     }
 
     if (robot.state === 'movingRight') {
-        robot.move(robot_moving, true);
+        robot.move(true);
     }
 
     if (robot.state === 'movingLeft') {
-        robot.move(robot_moving, false);
+        robot.move(false);
     }
 
     setTimeout(() => {

@@ -1,7 +1,8 @@
 class Character {
 
-    constructor(image, position) {
+    constructor(image, position, imagesCollection) {
         this.image = image;
+        this.imagesCollection = {idle: imagesCollection.idle, moving: imagesCollection.moving, jumping: imagesCollection.jumping};
         this.position = position;
         this.animationMoveSpeed = 1;
         this.state = 'idle';
@@ -15,9 +16,9 @@ class Character {
     }
 
 
-    jump(image, isAscending, idleImage) {
+    jump(isAscending) {
         if (isAscending && this.position.y > 220) {
-            this.image = image;
+            this.image = this.imagesCollection.jumping;
             this.frame = 100;
             this.velocity = -25;
             this.position.y += this.velocity;
@@ -27,7 +28,7 @@ class Character {
             this.position.y += this.velocity;
             if (this.isStanding()) {
                 this.velocity = 0;
-                this.idle(idleImage);
+                this.idle();
             }
         }
 
@@ -38,8 +39,8 @@ class Character {
         ctx.drawImage(this.image, this.position.x, this.position.y);
     }
 
-    move(image, toRight) {
-        this.image = image;
+    move(toRight) {
+        this.image = this.imagesCollection.moving;
         this.frame = 40;
         if (toRight && this.position.x < canvas.width - 125) {
             this.position.x += 16;
@@ -49,8 +50,8 @@ class Character {
 
     }
 
-    idle(image, positionY) {
-        this.image = image;
+    idle(positionY) {
+        this.image = this.imagesCollection.idle;
         this.state = 'idle';
         this.frame = 20;
 
@@ -59,8 +60,9 @@ class Character {
         }
     }
 
-    shoot(missiles, robot_idle) {
+    shoot(missiles) {
         this.frame = 100;
+        this.image = this.imagesCollection.moving;
         missiles.forEach(missile => {
             missile.fire(this.position.x, this.position.y);
 
@@ -70,7 +72,7 @@ class Character {
         });
 
         if (missiles.length === 0) {
-            this.idle(robot_idle);
+            this.idle();
         }
     }
 }
