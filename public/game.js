@@ -24,18 +24,22 @@ const robot = new Character(robot_idle, {x: 500, y: initialRobotYPosition}, {
     jumping: robot_jumping,
 });
 
-const answerYPosition = 120;
+const planetYPosition = 120;
 const answerA = new Image();
 answerA.src = './AnswerA.png';
+const planetA = new Planet(answerA, planetYPosition, 0);
 
 const answerB = new Image();
 answerB.src = './AnswerB.png';
+const planetB = new Planet(answerB, planetYPosition, 1);
 
 const answerC = new Image();
 answerC.src = './AnswerC.png';
+const planetC = new Planet(answerC, planetYPosition, 2);
 
 const answerD = new Image();
 answerD.src = './AnswerD.png';
+const planetD = new Planet(answerD, planetYPosition, 3);
 
 const missileImage = new Image();
 missileImage.src = './missile.png';
@@ -132,8 +136,10 @@ const showQuestion = async () => {
     ctx.fillStyle = '#ece9f3';
     const question = questions[currentQuestionNumber];
     ctx.fillText(question.questionBody, 30, 770);
-
-    attachAnswers(question);
+    planetA.draw(question.A);
+    planetB.draw(question.B);
+    planetC.draw(question.C);
+    planetD.draw(question.D);
 };
 
 function changeQuestion() {
@@ -162,10 +168,6 @@ function changeQuestion() {
 function showAndAnimateRobot() {
     clearCanvas(true);
     ctx.drawImage(image_background, 0, 0);
-    ctx.drawImage(answerA, 100, answerYPosition);
-    ctx.drawImage(answerB, 400, answerYPosition);
-    ctx.drawImage(answerC, 700, answerYPosition);
-    ctx.drawImage(answerD, 1000, answerYPosition);
     robot.draw();
     showQuestion();
     attachChangeButton();
@@ -243,56 +245,3 @@ function showFirstQuestion() {
     const question = questions[questionNumber];
     ctx.fillText(question.questionBody, 30, 770);
 }
-
-function attachAnswers(question) {
-    ctx.font = '16px Arial';
-    ctx.fillStyle = '#ece9f3';
-    const firstAnswer = question.A;
-    if (answerIsLongerThanOneLine(firstAnswer)) {
-        splitAnswer(firstAnswer, 80, answerYPosition - 20);
-    } else {
-        ctx.fillText(firstAnswer, 80, answerYPosition - 20);
-    }
-
-    const secondAnswer = question.B;
-    if (answerIsLongerThanOneLine(secondAnswer)) {
-        splitAnswer(secondAnswer, 380, answerYPosition - 20);
-    } else {
-        ctx.fillText(secondAnswer, 380, answerYPosition - 20);
-    }
-
-    const thirdAnswer = question.C;
-    if (answerIsLongerThanOneLine(thirdAnswer)) {
-        splitAnswer(thirdAnswer, 680, answerYPosition - 20);
-    } else {
-        ctx.fillText(thirdAnswer, 680, answerYPosition - 20);
-    }
-
-    const fourthAnswer = question.D;
-    if (answerIsLongerThanOneLine(fourthAnswer)) {
-        splitAnswer(fourthAnswer, 980, answerYPosition - 20);
-    } else {
-        ctx.fillText(fourthAnswer, 980, answerYPosition - 20);
-    }
-}
-
-function answerIsLongerThanOneLine(answer) {
-    return answer.length > 27;
-}
-
-function splitAnswer(answer, xPos, yPos) {
-    if (answer.length < 54) {
-        const firstPart = answer.slice(0, 27);
-        const secondPart = answer.slice(27, answer.length);
-        ctx.fillText(`${firstPart}-`, xPos, yPos - 20);
-        ctx.fillText(secondPart, xPos, yPos);
-    } else {
-        const firstPart = answer.slice(0, 27);
-        const secondPart = answer.slice(27, 48);
-        const thirdPart = answer.slice(54, answer.length);
-        ctx.fillText(`${firstPart}-`, xPos, yPos - 40);
-        ctx.fillText(`${secondPart}-`, xPos, yPos - 20);
-        ctx.fillText(thirdPart, xPos, yPos);
-    }
-}
-
