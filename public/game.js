@@ -105,11 +105,11 @@ window.addEventListener('keyup', (event) => {
         robot.state = 'jumpDown';
     }
 
-    if (event.key === 'd' && robot.state !== 'firing') {
+    if (event.key === 'd' && robot.state === 'movingRight') {
         robot.idle(initialRobotYPosition);
     }
 
-    if (event.key === 'a' && robot.state !== 'firing') {
+    if (event.key === 'a' && robot.state === 'movingLeft') {
         robot.idle(initialRobotYPosition);
     }
 });
