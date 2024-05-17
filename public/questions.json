@@ -5,7 +5,7 @@
         "B": "16-bitowy o stałej długości",
         "C": "1-6 bajtowym o zmiennej długości",
         "D": "1-4 bajtowym o zmiennej długości",
-        "correctAnswer": "D"
+        "correctAnswer": 3
     },
     {
         "questionBody": "Standard double precision:",
@@ -13,6 +13,6 @@
         "B": "Ma 32 bity długości",
         "C": "Ma 16 bitów długości",
         "D": "Ma 8 bitów długości",
-        "correctAnswer": "A"
+        "correctAnswer": 0
     }
 ]

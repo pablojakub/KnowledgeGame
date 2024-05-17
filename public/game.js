@@ -1,8 +1,10 @@
-
+const score = document.getElementById('scoreResult');
 const canvas = document.getElementById('game_canvas');
 const ctx = canvas.getContext('2d');
 let questions;
 let currentQuestionNumber;
+let currentCorrectAnswer;
+let question;
 const questionsAsked = [];
 
 const image_background = new Image();
@@ -27,19 +29,32 @@ const robot = new Character(robot_idle, {x: 500, y: initialRobotYPosition}, {
 const planetYPosition = 120;
 const answerA = new Image();
 answerA.src = './AnswerA.png';
-const planetA = new Planet(answerA, planetYPosition, 0);
 
 const answerB = new Image();
 answerB.src = './AnswerB.png';
-const planetB = new Planet(answerB, planetYPosition, 1);
 
 const answerC = new Image();
 answerC.src = './AnswerC.png';
-const planetC = new Planet(answerC, planetYPosition, 2);
 
 const answerD = new Image();
 answerD.src = './AnswerD.png';
-const planetD = new Planet(answerD, planetYPosition, 3);
+const planets = [];
+
+for (let i = 0; i <= 3; i++) {
+    switch (i) {
+        case 0:
+            planets.push(new Planet(answerA, planetYPosition, i));
+            break;
+        case 1:
+            planets.push(new Planet(answerB, planetYPosition, i));
+            break;
+        case 2:
+            planets.push(new Planet(answerC, planetYPosition, i));
+            break;
+        case 3:
+            planets.push(new Planet(answerD, planetYPosition, i));
+    }
+}
 
 const missileImage = new Image();
 missileImage.src = './missile.png';
@@ -95,7 +110,7 @@ window.addEventListener('keydown', (event) => {
     }
 
     if (event.key === 'f' && robot.state !== 'jumpUp') {
-        missiles.push(new Missile(missileImage));
+        missiles.push(new Missile(missileImage, planets));
         robot.state = 'firing';
     }
 });
@@ -134,12 +149,24 @@ const showQuestion = async () => {
     }
     ctx.font = '42px Arial';
     ctx.fillStyle = '#ece9f3';
-    const question = questions[currentQuestionNumber];
+    question = questions[currentQuestionNumber];
+    currentCorrectAnswer = question.correctAnswer;
     ctx.fillText(question.questionBody, 30, 770);
-    planetA.draw(question.A);
-    planetB.draw(question.B);
-    planetC.draw(question.C);
-    planetD.draw(question.D);
+    planets.forEach((planet, index) => {
+        switch (index) {
+            case 0:
+                planet.draw(question.A);
+                break;
+            case 1:
+                planet.draw(question.B);
+                break;
+            case 2:
+                planet.draw(question.C);
+                break;
+            case 3:
+                planet.draw(question.D);
+        }
+    });
 };
 
 function changeQuestion() {
@@ -158,7 +185,7 @@ function changeQuestion() {
         }
     }
     questionsAsked.push(currentQuestionNumber);;
-    const question = questions[currentQuestionNumber];
+    question = questions[currentQuestionNumber];
     ctx.font = '42px Arial';
     ctx.fillStyle = '#ece9f3';
     ctx.fillText(question.questionBody, 30, 770);
@@ -242,6 +269,16 @@ function showFirstQuestion() {
     const questionNumber = generateRandomNumber(0, questions.length);
     currentQuestionNumber = questionNumber;
     questionsAsked.push(questionNumber);
-    const question = questions[questionNumber];
+    question = questions[questionNumber];
+    currentCorrectAnswer = question.correctAnswer;
     ctx.fillText(question.questionBody, 30, 770);
+}
+
+// planetNumber is equivalent to answer
+function checkAnswer(planetNumber) {
+    if (planetNumber === currentCorrectAnswer) {
+        let currentScore = parseInt(score.innerText, 10);
+        currentScore += 10;
+        score.innerText = currentScore.toString();
+    }
 }

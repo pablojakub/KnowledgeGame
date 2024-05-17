@@ -1,7 +1,7 @@
 body {
 	font-family: Arial;
 	background-color: #111;
-	color: #efefef;	
+	color: #efefef;
 }
 
 .board {
@@ -22,4 +22,11 @@ body {
 	font-size: 16px;
 	text-align: center;
 	margin-top: 5px;
+}
+
+.score {
+	color: white;
+	text-align: center;
+	margin-top: 2rem;
+	font-size: 2rem;
 }

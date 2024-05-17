@@ -4,16 +4,24 @@ class Planet {
         this.image = image;
         this.number = number;
         this.positionY = positionY;
+        this.positionX = 0;
+        this.width = 130;
+        this.answer = '';
     }
 
     draw(answer) {
-        const xPosition = this.number === 0 ? 100 : this.number * 300 + 100;
+        this.answer = answer;
+        this.positionX = this.number === 0 ? 100 : this.number * 300 + 100;
         if (this.number === 0) {
-            ctx.drawImage(this.image, xPosition, this.positionY);
+            ctx.drawImage(this.image, this.positionX, this.positionY);
         } else {
-            ctx.drawImage(this.image, xPosition, this.positionY);
+            ctx.drawImage(this.image, this.positionX, this.positionY);
         }
-        this.attachAnswer(answer, xPosition - 20);
+        this.attachAnswer(this.answer, this.positionX - 20);
+    }
+
+    explode() {
+        alert(`${this.number} hit`);
     }
 
     attachAnswer(answer, xPos) {
