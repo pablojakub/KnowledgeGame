@@ -3,7 +3,6 @@ const canvas = document.getElementById('game_canvas');
 const ctx = canvas.getContext('2d');
 let questions;
 let currentQuestionNumber;
-let currentCorrectAnswer;
 let question;
 const questionsAsked = [];
 
@@ -155,16 +154,16 @@ const showQuestion = async () => {
     planets.forEach((planet, index) => {
         switch (index) {
             case 0:
-                planet.draw(question.A);
+                planet.draw(question.answers.A);
                 break;
             case 1:
-                planet.draw(question.B);
+                planet.draw(question.answers.B);
                 break;
             case 2:
-                planet.draw(question.C);
+                planet.draw(question.answers.C);
                 break;
             case 3:
-                planet.draw(question.D);
+                planet.draw(question.answers.D);
         }
     });
 };
@@ -276,7 +275,7 @@ function showFirstQuestion() {
 
 // planetNumber is equivalent to answer
 function checkAnswer(planetNumber) {
-    if (planetNumber === currentCorrectAnswer) {
+    if (planetNumber === question.correctAnswer) {
         let currentScore = parseInt(score.innerText, 10);
         currentScore += 10;
         score.innerText = currentScore.toString();

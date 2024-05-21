@@ -5,7 +5,7 @@ import bodyParser from 'body-parser';
 import {fileURLToPath} from 'url';
 import path from 'path';
 import fs from 'fs';
-
+import {shuffleAnswers} from './server/utils.js';
 
 const app = express();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -37,14 +37,22 @@ app.get('/get-questions', (req, res, next) => {
             res.status(500).json({error: 'Error reading JSON file'});
             return;
         }
-
-        // Parse the JSON data
         const jsonData = JSON.parse(data);
 
-        // Send JSON data as response
+        const shuffledAnswers = [];
+        jsonData.forEach((question) => {
+            shuffledAnswers.push(shuffleAnswers(question.answers));
+        });
+
+        jsonData.forEach((question, index) => {
+            question.answers = shuffledAnswers[index];
+        });
+
         res.json(jsonData);
     });
 });
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT);
+
+

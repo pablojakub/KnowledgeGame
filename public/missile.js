@@ -19,7 +19,7 @@ class Missile {
             if (this.position.y < planetYPosition + 50 && (this.position.x > planet.positionX - 50 && this.position.x < planet.positionX + planet.width - 30)) {
                 planet.explode();
                 alert(planet.answer);
-                checkAnswer(planet.number);
+                checkAnswer(planet.answer);
                 changeQuestion();
                 missiles.length = 0;
             }
