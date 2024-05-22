@@ -1,16 +1,21 @@
 class Planet {
 
     constructor(image, positionY, number) {
+        this.state = 'safe';
         this.image = image;
         this.number = number;
         this.positionY = positionY;
         this.positionX = 0;
         this.width = 130;
         this.answer = '';
+        this.safeImage = image;
+        this.explodeImage = new Image();
+        this.explodeImage.src = './explode.png';
     }
 
     draw(answer) {
         this.answer = answer;
+        this.image = this.state === 'safe' ? this.safeImage : this.explodeImage;
         this.positionX = this.number === 0 ? 100 : this.number * 300 + 100;
         if (this.number === 0) {
             ctx.drawImage(this.image, this.positionX, this.positionY);
@@ -21,7 +26,7 @@ class Planet {
     }
 
     explode() {
-        alert(`${this.number} hit`);
+        this.state = 'exploded';
     }
 
     attachAnswer(answer, xPos) {

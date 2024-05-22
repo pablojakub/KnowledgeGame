@@ -4,6 +4,7 @@ const ctx = canvas.getContext('2d');
 let questions;
 let currentQuestionNumber;
 let question;
+let attempts = 0;
 const questionsAsked = [];
 
 const image_background = new Image();
@@ -175,6 +176,8 @@ function changeQuestion() {
         alert('Odpowiedziałeś na wszystkie pytania! Gratulacje!');
         return;
     }
+    attempts = 0;
+    resetPlanetState();
 
     while (true) {
         if (questionsAsked.includes(currentQuestionNumber)) {
@@ -275,9 +278,27 @@ function showFirstQuestion() {
 
 // planetNumber is equivalent to answer
 function checkAnswer(planetNumber) {
+    robot.state = 'idle';
     if (planetNumber === question.correctAnswer) {
+        alert('Poprawna odpowiedź');
         let currentScore = parseInt(score.innerText, 10);
         currentScore += 10;
+        // TODO: count score based on attempts and time
         score.innerText = currentScore.toString();
+        changeQuestion();
+    } else {
+        alert('Zła odpowiedź');
+        attempts++;
+        if (attempts === 3) {
+            changeQuestion();
+        }
+        // TODO: subtract live feature
     }
+
+}
+
+function resetPlanetState() {
+    planets.forEach((planet) => {
+        planet.state = 'safe';
+    });
 }

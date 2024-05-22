@@ -17,11 +17,13 @@ class Missile {
 
         this.planets.forEach((planet) => {
             if (this.position.y < planetYPosition + 50 && (this.position.x > planet.positionX - 50 && this.position.x < planet.positionX + planet.width - 30)) {
-                planet.explode();
-                alert(planet.answer);
-                checkAnswer(planet.answer);
-                changeQuestion();
-                missiles.length = 0;
+                if (planet.state !== 'exploded') {
+                    planet.explode();
+                    missiles.length = 0;
+                    setTimeout(() => {
+                        checkAnswer(planet.answer, planet);
+                    }, 200);
+                }
             }
         });
     }
