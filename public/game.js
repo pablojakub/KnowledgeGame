@@ -56,6 +56,11 @@ for (let i = 0; i <= 3; i++) {
     }
 }
 
+const lives = [];
+for (let i = 0; i <= 2; i++) {
+    lives.push(new Life());
+}
+
 const missileImage = new Image();
 missileImage.src = './missile.png';
 const missiles = [];
@@ -199,6 +204,7 @@ function showAndAnimateRobot() {
     ctx.drawImage(image_background, 0, 0);
     robot.draw();
     showQuestion();
+    attachLives();
     attachChangeButton();
     if (robot.state === 'idle') {
         robot.position.y += robot.animationMoveSpeed;
@@ -276,23 +282,27 @@ function showFirstQuestion() {
     ctx.fillText(question.questionBody, 30, 770);
 }
 
-// planetNumber is equivalent to answer
-function checkAnswer(planetNumber) {
+function checkAnswer(answer) {
     robot.state = 'idle';
-    if (planetNumber === question.correctAnswer) {
+    if (answer === question.correctAnswer) {
         alert('Poprawna odpowiedź');
         let currentScore = parseInt(score.innerText, 10);
-        currentScore += 10;
         // TODO: count score based on attempts and time
+        currentScore += 10;
         score.innerText = currentScore.toString();
         changeQuestion();
     } else {
         alert('Zła odpowiedź');
         attempts++;
+        lives.pop();
+        if (lives.length === 0) {
+            alert('Koniec gry przegrałeś');
+            // TODO: show another canvas with score;
+            return;
+        }
         if (attempts === 3) {
             changeQuestion();
         }
-        // TODO: subtract live feature
     }
 
 }
@@ -300,5 +310,11 @@ function checkAnswer(planetNumber) {
 function resetPlanetState() {
     planets.forEach((planet) => {
         planet.state = 'safe';
+    });
+}
+
+function attachLives() {
+    lives.forEach((live, index) => {
+        live.draw(40 + (index + 1) * 25);
     });
 }
