@@ -4,6 +4,8 @@ const ctx = canvas.getContext('2d');
 let questions;
 let currentQuestionNumber;
 let question;
+let secondsLeft = 30;
+let frameNumber = 0;
 let attempts = 0;
 const questionsAsked = [];
 
@@ -182,6 +184,7 @@ function changeQuestion() {
         return;
     }
     attempts = 0;
+    secondsLeft = 30;
     resetPlanetState();
 
     while (true) {
@@ -205,6 +208,7 @@ function showAndAnimateRobot() {
     robot.draw();
     showQuestion();
     attachLives();
+    showTime();
     attachChangeButton();
     if (robot.state === 'idle') {
         robot.position.y += robot.animationMoveSpeed;
@@ -317,4 +321,20 @@ function attachLives() {
     lives.forEach((live, index) => {
         live.draw(40 + (index + 1) * 25);
     });
+}
+
+function showTime() {
+    if (secondsLeft === 0) {
+        alert('Koniec czasu');
+        changeQuestion();
+        return;
+    }
+    frameNumber++;
+    if (frameNumber === 40) {
+        frameNumber = 0;
+        secondsLeft--;
+    }
+    ctx.font = '22px Arial';
+    ctx.fillStyle = '#ece9f3';
+    ctx.fillText(`Zostało: ${secondsLeft} sekund`, 980, 40)
 }

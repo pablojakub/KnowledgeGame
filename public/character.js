@@ -6,7 +6,7 @@ class Character {
         this.position = position;
         this.animationMoveSpeed = 1;
         this.state = 'idle';
-        this.frame = 20;
+        this.frame = 60;
         this.velocity = 0;
         this.weight = 8;
     }
@@ -19,7 +19,7 @@ class Character {
     jump(isAscending) {
         if (isAscending && this.position.y > 220) {
             this.image = this.imagesCollection.jumping;
-            this.frame = 100;
+            this.frame = 60;
             this.velocity = -25;
             this.position.y += this.velocity;
         }
@@ -41,7 +41,7 @@ class Character {
 
     move(toRight) {
         this.image = this.imagesCollection.moving;
-        this.frame = 40;
+        this.frame = 60;
         if (toRight && this.position.x < canvas.width - 125) {
             this.position.x += 16;
         } else if (toRight === false && this.position.x > 0) {
@@ -53,7 +53,7 @@ class Character {
     idle(positionY) {
         this.image = this.imagesCollection.idle;
         this.state = 'idle';
-        this.frame = 20;
+        this.frame = 60;
 
         if (positionY) {
             this.position.y = positionY;
@@ -61,7 +61,7 @@ class Character {
     }
 
     shoot(missiles) {
-        this.frame = 100;
+        this.frame = 60;
         this.image = this.imagesCollection.moving;
         missiles.forEach(missile => {
             missile.fire(this.position.x, this.position.y);
