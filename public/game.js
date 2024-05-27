@@ -181,6 +181,7 @@ function changeQuestion() {
 
     if (questionsAsked.length === questions.length) {
         alert('Odpowiedziałeś na wszystkie pytania! Gratulacje!');
+        // TODO: result panel
         return;
     }
     attempts = 0;
@@ -291,8 +292,7 @@ function checkAnswer(answer) {
     if (answer === question.correctAnswer) {
         alert('Poprawna odpowiedź');
         let currentScore = parseInt(score.innerText, 10);
-        // TODO: count score based on attempts and time
-        currentScore += 10;
+        currentScore += 1 * secondsLeft;
         score.innerText = currentScore.toString();
         changeQuestion();
     } else {
