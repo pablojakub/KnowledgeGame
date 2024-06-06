@@ -18,5 +18,45 @@
             "D": "Ma 8 bitów długości"
         },
         "correctAnswer": "Ma 64 bity długości"
+    },
+    {
+        "questionBody": "GUID to:",
+        "answers": {
+            "A": "128-bitowy string",
+            "B": "256-bitowy string",
+            "C": "256-bitowy int",
+            "D": "128-bitowy byte"
+        },
+        "correctAnswer": "128-bitowy string"
+    },
+    {
+        "questionBody": "Różnica między field a property to:",
+        "answers": {
+            "A": "Property można setować a field nie",
+            "B": "Property to to samo co field",
+            "C": "Field daje dostęp do pamięci a property nie",
+            "D": "Property może być dowolnym typem, a field nie"
+        },
+        "correctAnswer": "Field daje dostęp do pamięci a property nie"
+    },
+    {
+        "questionBody": "Czym jest struct w .NET",
+        "answers": {
+            "A": "To typ referencyjny do tworzenia kompleksowych kolekcji danych",
+            "B": "To typ wartościowy (value type) do tworzenia prostych obiektów",
+            "C": "To specjalny typ do połączeń z bazą danych",
+            "D": "To abstrakcyjna klasa, której nie można dziedziczyć"
+        },
+        "correctAnswer": "To typ wartościowy (value type) do tworzenia prostych obiektów"
+    },
+    {
+        "questionBody": "Czym jest record w .NET",
+        "answers": {
+            "A": "To typ przechowywany w stacku i jest mutowalny",
+            "B": "To typ przechowywany w heap i jest mutowalny",
+            "C": "To typ przechowywany w heap i jest niemutowalny",
+            "D": "To typ przechowywany w stacku i jest niemutowalny"
+        },
+        "correctAnswer": "To typ przechowywany w heap i jest mutowalny"
     }
 ]

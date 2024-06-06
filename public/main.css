@@ -14,7 +14,7 @@ body {
 	background-color: black;
 	width: 1200px;
 	height: 800px;
-	border: 2px solid brown;
+	border: 2px solid white;
 }
 
 .info {
@@ -29,4 +29,109 @@ body {
 	text-align: center;
 	margin-top: 2rem;
 	font-size: 2rem;
+}
+
+#score_board {
+	width: 1200px;
+	margin: 0 auto;
+	margin-top: 10px;
+	height: 800px;
+	border: 2px solid white;
+	background-image: url('/background.png');
+	position: relative;
+}
+
+.score_result {
+	position: absolute;
+	inset: 0;
+	margin: auto;
+	width: 400px;
+	height: 550px;
+	border-radius: 5px;
+	background-color: #0F1828;
+	padding: 12px;
+	box-shadow: 4px 4px 12px 0px rgb(8, 8, 8);
+}
+
+.inner {
+	background-color: #566C98;
+	width: calc(100% - 24px);
+	height: calc(100% - 24px);
+	border-radius: 5px;
+	padding: 12px;
+}
+
+.inner_circle {
+	border: 1px solid white;
+	border-radius: 5px;
+	background-color: transparent;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+
+	&>img {
+		margin-top: 12px;
+		max-width: 90px;
+	}
+}
+
+.user_score {
+	margin-top: 16px;
+	margin-bottom: 24px;
+	display: flex;
+	flex-direction: column;
+	max-width: fit-content;
+	margin-left: auto;
+	margin-right: auto;
+	gap: 8px;
+
+	&>* {
+		margin: 0;
+	}
+}
+
+.score_table {
+	display: grid;
+	margin-top: 8px;
+	width: 250px;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: auto;
+	max-height: 200px;
+	overflow-y: auto;
+
+	&>* {
+		border-bottom: 1px solid #0F1828;
+		padding: 4px;
+	}
+}
+
+.rematch_section {
+	display: flex;
+	justify-content: flex-end;
+	width: 360px;
+
+	&>button {
+		padding: 6px 12px;
+		background-image: linear-gradient(45deg,
+				hsl(218deg 45% 11%) 0%,
+				hsl(212deg 50% 13%) 28%,
+				hsl(207deg 56% 14%) 44%,
+				hsl(203deg 62% 16%) 54%,
+				hsl(199deg 70% 17%) 62%,
+				hsl(196deg 78% 18%) 68%,
+				hsl(193deg 86% 18%) 73%,
+				hsl(190deg 91% 19%) 80%,
+				hsl(187deg 91% 20%) 88%,
+				hsl(185deg 84% 22%) 100%);
+		color: white;
+		border: none;
+		outline: none;
+		cursor: pointer;
+		border-radius: 5px;
+		transition: box-shadow 200ms ease-in-out;
+
+		&:hover {
+			box-shadow: 2px 2px 6px 0px rgb(8, 8, 8);
+		}
+	}
 }

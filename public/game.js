@@ -1,5 +1,7 @@
 const score = document.getElementById('scoreResult');
 const canvas = document.getElementById('game_canvas');
+const scoreBoard = document.getElementById('score_board');
+const gameBoard = document.getElementById('game');
 const ctx = canvas.getContext('2d');
 let questions;
 let currentQuestionNumber;
@@ -181,7 +183,7 @@ function changeQuestion() {
 
     if (questionsAsked.length === questions.length) {
         alert('Odpowiedziałeś na wszystkie pytania! Gratulacje!');
-        // TODO: result panel
+        showScoreBoard();
         return;
     }
     attempts = 0;
@@ -247,9 +249,10 @@ function showAndAnimateRobot() {
     }, 1000 / robot.frame);
 }
 
-getQuestions();
-showAndAnimateRobot();
-
+if (gameBoard.style.display !== 'none') {
+    getQuestions();
+    showAndAnimateRobot();
+}
 
 // utils
 function generateRandomNumber(min, max) {
@@ -301,7 +304,7 @@ function checkAnswer(answer) {
         lives.pop();
         if (lives.length === 0) {
             alert('Koniec gry przegrałeś');
-            // TODO: show another canvas with score;
+            showScoreBoard();
             return;
         }
         if (attempts === 3) {

@@ -22,7 +22,7 @@
 <body>
 
 	<main>
-		<article>
+		<article id="game" style="display: none;">
 			<div class="board">
 				<canvas id="game_canvas" width="1200" height="800"></canvas>
 				<div class="info">Sterowanie: [ a ] Ruch w lewo --- [ d ] Ruch w prawo --- [ w ] Skok --- [ f ] Strzał
@@ -30,12 +30,36 @@
 			</div>
 			<h2 class="score">Wynik: <span id="scoreResult">0</span> pkt</h2>
 		</article>
+		<article id="score_board">
+			<div class="score_result">
+				<div class="inner">
+					<div class="inner_circle">
+						<img src="./success.png" alt="success_robot">
+						<div class="user_score">
+							<h3>Wynik:</h3>
+							<h3 id="user_score"></h3>
+						</div>
+						<div class="user_score">
+							<h3>Tabela:</h3>
+							<div class="score_table">
+								<div>Użytkownik</div>
+								<div>Wynik</div>
+							</div>
+						</div>
+						<div class="rematch_section">
+							<button class="rematchBtn" id="rematchBtn">ZAGRAJ PONOWNIE</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</article>
 	</main>
 
 	<script src="character.js"></script>
 	<script src="missile.js"></script>
 	<script src="life.js"></script>
 	<script src="planet.js"></script>
+	<script src="scoreBoard.js"></script>
 	<script src="game.js"></script>
 
 </body>
