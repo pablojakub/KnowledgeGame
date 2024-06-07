@@ -5,6 +5,7 @@ rematchBtn.addEventListener('click', () => {
     gameBoard.style.display = 'block';
     scoreBoard.style.display = 'none';
     //TODO: finish rematch
+    backgroundMusic.play();
     getQuestions();
     showAndAnimateRobot();
 });

@@ -2,6 +2,7 @@ const score = document.getElementById('scoreResult');
 const canvas = document.getElementById('game_canvas');
 const scoreBoard = document.getElementById('score_board');
 const gameBoard = document.getElementById('game');
+const backgroundMusic = document.getElementById('backgroundMusic');
 const ctx = canvas.getContext('2d');
 let questions;
 let currentQuestionNumber;
@@ -250,6 +251,7 @@ function showAndAnimateRobot() {
 }
 
 if (gameBoard.style.display !== 'none') {
+    backgroundMusic.play();
     getQuestions();
     showAndAnimateRobot();
 }
