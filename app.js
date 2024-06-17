@@ -30,7 +30,7 @@ app.get('/', (req, res, next) => {
 });
 
 app.get('/get-questions', (req, res, next) => {
-    const questionsFilePath = path.join(__dirname, './public/questions.json');
+    const questionsFilePath = path.join(__dirname, './assets/questions.json');
     fs.readFile(questionsFilePath, 'utf8', (err, data) => {
         if (err) {
             console.error('Error reading JSON file:', err);
