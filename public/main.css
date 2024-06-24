@@ -89,7 +89,7 @@ body {
 
 .user_score {
 	margin-top: 16px;
-	margin-bottom: 24px;
+	margin-bottom: 16px;
 	display: flex;
 	flex-direction: column;
 	max-width: fit-content;

@@ -6,6 +6,7 @@ import {fileURLToPath} from 'url';
 import path from 'path';
 import fs from 'fs';
 import {shuffleAnswers} from './server/utils.js';
+import {getAllUsers} from './server/controllers/usersController.js';
 
 const app = express();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -50,6 +51,14 @@ app.get('/get-questions', (req, res, next) => {
 
         res.json(jsonData);
     });
+});
+
+app.get('/get-users-score', (req, res, next) => {
+    getAllUsers()
+        .then(users => {
+            res.status(200).json(users);
+        })
+        .catch(e => res.status(500).json({error: 'Error while reading users from database'}));
 });
 
 const PORT = process.env.PORT || 3000;
