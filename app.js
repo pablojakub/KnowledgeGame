@@ -11,7 +11,7 @@ import {getAllUsers} from './server/controllers/usersController.js';
 const app = express();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-app.use(secure);
+// app.use(secure);
 app.use(helmet.contentSecurityPolicy({
     directives: {
         "script-src": ["'self'",
@@ -62,6 +62,6 @@ app.get('/get-users-score', (req, res, next) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT);
+app.listen(PORT, '0.0.0.0');
 
 
