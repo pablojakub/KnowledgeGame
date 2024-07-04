@@ -20,9 +20,32 @@
 </head>
 
 <body>
-
 	<main>
-		<article id="game">
+		<article id="config_board">
+			<div class="config_modal">
+
+				<h1 class="config_header">
+					KNOWLEDGE GAME
+				</h1>
+				<div class="inner">
+					<div class="inner_circle">
+						<h2 class="register_header">Rejestracja</h2>
+						<form class="register_form">
+							<label for="username">Nazwa użytkownika:</label>
+							<input type="username" type="text" id="username">
+							<div class="register_button">
+								<button class="form_button" id="playBtn">ZAGRAJ</button>
+							</div>
+						</form>
+
+					</div>
+				</div>
+			</div>
+			<div class="info info_config">Sterowanie: [ a ] Ruch w lewo --- [ d ] Ruch w prawo --- [ w ] Skok --- [
+				f ] Strzał
+			</div>
+		</article>
+		<article id="game" style="display: none;">
 			<div class="board">
 				<canvas id="game_canvas" width="1200" height="800"></canvas>
 				<div class="info">Sterowanie: [ a ] Ruch w lewo --- [ d ] Ruch w prawo --- [ w ] Skok --- [ f ] Strzał
@@ -50,7 +73,7 @@
 							</div>
 						</div>
 						<div class="rematch_section">
-							<button class="rematchBtn" id="rematchBtn">ZAGRAJ PONOWNIE</button>
+							<button class="form_button" id="rematchBtn">ZAGRAJ PONOWNIE</button>
 						</div>
 					</div>
 				</div>
@@ -62,6 +85,7 @@
 	<script src="missile.js"></script>
 	<script src="life.js"></script>
 	<script src="planet.js"></script>
+	<script src="configBoard.js"></script>
 	<script src="scoreBoard.js"></script>
 	<script src="game.js"></script>
 
