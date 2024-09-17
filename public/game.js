@@ -1,6 +1,8 @@
 const score = document.getElementById('scoreResult');
 const canvas = document.getElementById('game_canvas');
 const scoreBoard = document.getElementById('score_board');
+const userScore = document.getElementById('user_score');
+const healthCheckbox = document.getElementById('health');
 const gameBoard = document.getElementById('game');
 const backgroundMusic = document.getElementById('backgroundMusic');
 const ctx = canvas.getContext('2d');
@@ -184,7 +186,7 @@ function changeQuestion() {
 
     if (questionsAsked.length === questions.length) {
         alert('Odpowiedziałeś na wszystkie pytania! Gratulacje!');
-        showScoreBoard();
+        void showScoreBoard();
         return;
     }
     attempts = 0;
@@ -250,12 +252,6 @@ function showAndAnimateRobot() {
     }, 1000 / robot.frame);
 }
 
-if (gameBoard.style.display !== 'none') {
-    backgroundMusic.play();
-    getQuestions();
-    showAndAnimateRobot();
-}
-
 // utils
 function generateRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
@@ -303,10 +299,12 @@ function checkAnswer(answer) {
     } else {
         alert('Zła odpowiedź');
         attempts++;
-        lives.pop();
+        if (healthCheckbox.checked) {
+            lives.pop();
+        }
         if (lives.length === 0) {
             alert('Koniec gry przegrałeś');
-            showScoreBoard();
+            void showScoreBoard();
             return;
         }
         if (attempts === 3) {
@@ -342,4 +340,28 @@ function showTime() {
     ctx.font = '22px Arial';
     ctx.fillStyle = '#ece9f3';
     ctx.fillText(`Zostało: ${secondsLeft} sekund`, 980, 40)
+}
+
+async function showScoreBoard() {
+    gameBoard.style.display = 'none';
+    scoreBoard.style.display = 'block';
+
+    backgroundMusic.pause();
+    backgroundMusic.currentTime = 0;
+
+    const users = await getAllUsers();
+    const currentUser = localStorage.getItem('username') ?? 'user_not_found'
+    console.log('🚀 ~ showScoreBoard ~ currentUser:', currentUser);
+    console.log('🚀 ~ showScoreBoard ~ users:', users);
+    let currentScore = parseInt(score.innerText, 10);
+    userScore.innerHTML = `${currentUser}: ${currentScore} pkt`;
+}
+
+async function getAllUsers() {
+    const result = await fetch('/get-users-score');
+    if (result.status === 500) {
+        // TODO: display error result and users
+        return;
+    }
+    return result;
 }

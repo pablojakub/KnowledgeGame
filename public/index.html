@@ -20,7 +20,7 @@
 </head>
 
 <body>
-	<main>
+	<main id="main">
 		<article id="config_board">
 			<div class="config_modal">
 
@@ -31,8 +31,14 @@
 					<div class="inner_circle">
 						<h2 class="register_header">Rejestracja</h2>
 						<form class="register_form">
+							<span id="errorMsg" style="display: none;"></span>
 							<label for="username">Nazwa użytkownika:</label>
-							<input type="username" type="text" id="username">
+							<input required name="username" type="text" id="username">
+							<h2>Konfiguracja</h2>
+							<label for="health">Zmniejszaj ilość żyć po błędnej odpowiedzi
+								<input class="checkbox" type="checkbox" name="health" id="health">
+							</label>
+
 							<div class="register_button">
 								<button class="form_button" id="playBtn">ZAGRAJ</button>
 							</div>
@@ -81,6 +87,9 @@
 		</article>
 	</main>
 	<audio id="backgroundMusic" src="background-music.mp3"></audio>
+	<audio id="play" src="play.wav"></audio>
+	<audio id="shoot" src="shoot.mp3"></audio>
+	<audio id="explosion" src="explosion.mp3"></audio>
 	<script src="character.js"></script>
 	<script src="missile.js"></script>
 	<script src="life.js"></script>
@@ -88,7 +97,6 @@
 	<script src="configBoard.js"></script>
 	<script src="scoreBoard.js"></script>
 	<script src="game.js"></script>
-
 </body>
 
 </html>

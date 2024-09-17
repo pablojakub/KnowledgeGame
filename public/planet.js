@@ -26,6 +26,8 @@ class Planet {
     }
 
     explode() {
+        const explosionSound = document.getElementById(`explosion`);
+        explosionSound.play();
         this.state = 'exploded';
     }
 

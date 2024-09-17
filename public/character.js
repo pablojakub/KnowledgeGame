@@ -63,8 +63,9 @@ class Character {
     shoot(missiles) {
         this.frame = 60;
         this.image = this.imagesCollection.moving;
-        missiles.forEach(missile => {
-            missile.fire(this.position.x, this.position.y);
+        missiles.forEach((missile, index) => {
+            let missileSound = document.getElementById(`shoot`);
+            missile.fire(this.position.x, this.position.y, missileSound);
 
             if (missile.position.y < 0) {
                 missiles.shift();

@@ -1,3 +1,4 @@
+
 class Missile {
     constructor(image, planets) {
         this.image = image;
@@ -6,7 +7,11 @@ class Missile {
         this.planets = planets;
     }
 
-    fire(positionX, positionY) {
+    fire(positionX, positionY, missileSound) {
+        if (missileSound !== null && this.state === 'deaden') {
+            missileSound.currentTime = 0;
+            missileSound.play();
+        }
         this.position.x = positionX;
         if (this.state === 'deaden') {
             this.position.y = positionY;
