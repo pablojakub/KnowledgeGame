@@ -209,6 +209,9 @@ function changeQuestion() {
 }
 
 function showAndAnimateRobot() {
+    if (scoreBoard.style.display === 'block') {
+        return;
+    }
     clearCanvas(true);
     ctx.drawImage(image_background, 0, 0);
     robot.draw();
@@ -345,14 +348,11 @@ function showTime() {
 async function showScoreBoard() {
     gameBoard.style.display = 'none';
     scoreBoard.style.display = 'block';
-
     backgroundMusic.pause();
     backgroundMusic.currentTime = 0;
 
     const users = await getAllUsers();
     const currentUser = localStorage.getItem('username') ?? 'user_not_found'
-    console.log('🚀 ~ showScoreBoard ~ currentUser:', currentUser);
-    console.log('🚀 ~ showScoreBoard ~ users:', users);
     let currentScore = parseInt(score.innerText, 10);
     userScore.innerHTML = `${currentUser}: ${currentScore} pkt`;
 }
