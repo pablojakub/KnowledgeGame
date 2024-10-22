@@ -6,7 +6,7 @@ import {fileURLToPath} from 'url';
 import path from 'path';
 import fs from 'fs';
 import {shuffleAnswers} from './server/utils.js';
-import {getAllUsers} from './server/controllers/usersController.js';
+import {addUserScore} from './server/controllers/usersController.js';
 
 const app = express();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -53,12 +53,20 @@ app.get('/get-questions', (req, res, next) => {
     });
 });
 
-app.get('/get-users-score', (req, res, next) => {
-    getAllUsers()
-        .then(users => {
-            res.status(200).json(users);
+app.post('/add-user-score', (req, res, next) => {
+    const {nickName, score, userId} = req.body;
+    if (nickName === null || score === null || userId === null) {
+        res.status(404).json({error: 'Data is missing'});
+        return;
+    }
+    addUserScore({nickName: nickName, score: score, userId: userId})
+        .then(userREsults => {
+            res.status(200).json(userREsults);
         })
-        .catch(e => res.status(500).json({error: 'Error while reading users from database'}));
+        .catch(e => {
+            console.log('🚀 ~ app.post ~ e:', e);
+            res.status(500).json({error: 'Error adding score'})
+        });
 });
 
 const PORT = process.env.PORT || 3000;

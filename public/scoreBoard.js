@@ -1,5 +1,6 @@
 const rematchBtn = document.getElementById('rematchBtn');
 
+
 rematchBtn.addEventListener('click', () => {
     //TODO: finish rematch
     playSound.play();

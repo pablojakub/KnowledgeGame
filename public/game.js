@@ -4,7 +4,10 @@ const scoreBoard = document.getElementById('score_board');
 const userScore = document.getElementById('user_score');
 const healthCheckbox = document.getElementById('health');
 const gameBoard = document.getElementById('game');
+const scoreTable = document.getElementById('score-table');
 const backgroundMusic = document.getElementById('backgroundMusic');
+const success = document.getElementById('success');
+const errorAnswer = document.getElementById('error-answer');
 const ctx = canvas.getContext('2d');
 let questions;
 let currentQuestionNumber;
@@ -34,6 +37,7 @@ const robot = new Character(robot_idle, {x: 500, y: initialRobotYPosition}, {
 });
 
 const planetYPosition = 120;
+const planetHeight = 125;
 const answerA = new Image();
 answerA.src = './AnswerA.png';
 
@@ -231,11 +235,11 @@ function showAndAnimateRobot() {
     }
 
     if (robot.state === 'jumpUp') {
-        robot.jump(true);
+        robot.jump(true, planetHeight + planetYPosition, planets);
     }
 
     if (robot.state === 'jumpDown') {
-        robot.jump(false);
+        robot.jump(false, planetHeight + planetYPosition, planets);
     }
 
     if (robot.state === 'firing') {
@@ -291,16 +295,24 @@ function showFirstQuestion() {
     ctx.fillText(question.questionBody, 30, 770);
 }
 
-function checkAnswer(answer) {
-    robot.state = 'idle';
-    if (answer === question.correctAnswer) {
-        alert('Poprawna odpowiedź');
-        let currentScore = parseInt(score.innerText, 10);
-        currentScore += 1 * secondsLeft;
-        score.innerText = currentScore.toString();
-        changeQuestion();
+function checkAnswer(answer, isJumping, planet) {
+    if (isJumping === false) {
+        robot.state = 'idle';
     } else {
-        alert('Zła odpowiedź');
+        robot.state = 'jumpDown';
+    }
+    if (answer === question.correctAnswer) {
+        showCorrectAnswerAnimation();
+        planet.explode(false);
+        setTimeout(() => {
+            let currentScore = parseInt(score.innerText, 10);
+            currentScore += 1 * secondsLeft;
+            score.innerText = currentScore.toString();
+            changeQuestion();
+        }, 1000)
+    } else {
+        planet.explode(true);
+        showError();
         attempts++;
         if (healthCheckbox.checked) {
             lives.pop();
@@ -351,17 +363,61 @@ async function showScoreBoard() {
     backgroundMusic.pause();
     backgroundMusic.currentTime = 0;
 
-    const users = await getAllUsers();
     const currentUser = localStorage.getItem('username') ?? 'user_not_found'
+    const userId = localStorage.getItem('userId');
+
+    if (!!userId === false) {
+        throw new Error('Could not find user');
+    }
     let currentScore = parseInt(score.innerText, 10);
     userScore.innerHTML = `${currentUser}: ${currentScore} pkt`;
-}
-
-async function getAllUsers() {
-    const result = await fetch('/get-users-score');
-    if (result.status === 500) {
-        // TODO: display error result and users
+    const sendScoreResult = await addUserScore(currentUser, currentScore, userId);
+    if (sendScoreResult === undefined || sendScoreResult.length === 0) {
         return;
     }
-    return result;
+    let html = '';
+    sendScoreResult.forEach((score) => {
+        html += `<div>${score.nickName}</div><div>${score.score}</div>`;
+    })
+    scoreTable.insertAdjacentHTML('beforeend', html);
+}
+
+async function addUserScore(userName, score, userId) {
+    const result = await fetch('/add-user-score', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            nickName: userName,
+            score: score,
+            userId: userId,
+        })
+    });
+    if (result.ok === false) {
+        const errResult = await result.json();
+        alert(errResult.error);
+        showConfigBoard();
+        return;
+    }
+    return await result.json();
+}
+
+function showConfigBoard() {
+    gameBoard.style.display = 'none';
+    scoreBoard.style.display = 'none';
+    configBoard.style.display = 'block';
+}
+
+function showError() {
+    errorAnswer.classList.add('error_answer_show');
+
+    setTimeout(() => {
+        errorAnswer.classList.remove('error_answer_show');
+    }, 250);
+};
+
+
+function showCorrectAnswerAnimation() {
+    success.play();
 }

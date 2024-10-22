@@ -3,33 +3,31 @@ import {MongoClient} from 'mongodb';
 const uri = 'mongodb+srv://pablo_jakub:Warta1992@cluster0.zjyldhv.mongodb.net/UsersDb?retryWrites=true&w=majority&appName=Cluster0';
 const client = new MongoClient(uri);
 
-export const getAllUsers = async () => {
-    try {
-        const database = client.db('UsersDb');
-        const usersTable = database.collection('Users');
-        const users = await usersTable.find();
-        const userResult = [];
-        for await (const user of users) {
-            userResult.push({
-                nickName: user.nickName,
-                score: user.score,
-            })
-        }
-        return userResult;
-    } finally {
-        await client.close();
-    }
-};
-
-export const addUserScore = async ({nickName, score}) => {
+export const addUserScore = async ({nickName, score, userId}) => {
     try {
         const database = client.db('UsersDb');
         const usersTable = database.collection('Users');
         const result = await usersTable.insertOne({
-            "nickName": nickName,
-            "score": score,
+            'nickName': nickName,
+            'score': score,
+            'userId': userId,
         });
-    } finally {
+        const users = await usersTable.find().toArray();
+        const userResult = [];
+        for (const user of users) {
+            if (user.userId === userId || user.nickName === nickName) {
+                userResult.push({
+                    nickName: user.nickName,
+                    score: user.score,
+                })
+            }
+        }
+        return userResult;
+
+    } catch (e) {
+        throw new Error(e.message);
+    }
+    finally {
         await client.close();
     }
 }

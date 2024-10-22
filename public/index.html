@@ -53,6 +53,7 @@
 		</article>
 		<article id="game" style="display: none;">
 			<div class="board">
+				<div id="error-answer" class="error_answer"></div>
 				<canvas id="game_canvas" width="1200" height="800"></canvas>
 				<div class="info">Sterowanie: [ a ] Ruch w lewo --- [ d ] Ruch w prawo --- [ w ] Skok --- [ f ] Strzał
 				</div>
@@ -73,7 +74,7 @@
 						</div>
 						<div class="user_score">
 							<h3>Tabela:</h3>
-							<div class="score_table">
+							<div class="score_table" id="score-table">
 								<div>Użytkownik</div>
 								<div>Wynik</div>
 							</div>
@@ -87,6 +88,7 @@
 		</article>
 	</main>
 	<audio id="backgroundMusic" src="background-music.mp3"></audio>
+	<audio id="success" src="success.mp3"></audio>
 	<audio id="play" src="play.wav"></audio>
 	<audio id="shoot" src="shoot.mp3"></audio>
 	<audio id="explosion" src="explosion.mp3"></audio>

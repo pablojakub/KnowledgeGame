@@ -13,7 +13,7 @@ playBtn.addEventListener('click', (e) => {
     if (!!userInput.value === true) {
         prepareGame();
     } else {
-        showError();
+        showError(); 
     }
 });
 
@@ -21,6 +21,9 @@ function prepareGame() {
     playBtn.disabled = true;
     const sanitizedString = userInput.value.replace(/<[^>]*>?/gm, '')
     localStorage.setItem('username', sanitizedString);
+    const userIdFromStorage = localStorage.getItem('userId');
+    const userId = !!userIdFromStorage === false ? crypto.randomUUID() : userIdFromStorage;
+    localStorage.setItem('userId', userId);
     userInput.value = '';
     playSound.play();
     setTimeout(() => {

@@ -6,6 +6,7 @@ class Planet {
         this.number = number;
         this.positionY = positionY;
         this.positionX = 0;
+        this.positionXEnd = 0;
         this.width = 130;
         this.answer = '';
         this.safeImage = image;
@@ -17,6 +18,7 @@ class Planet {
         this.answer = answer;
         this.image = this.state === 'safe' ? this.safeImage : this.explodeImage;
         this.positionX = this.number === 0 ? 100 : this.number * 300 + 100;
+        this.positionXEnd = this.positionX + this.width;
         if (this.number === 0) {
             ctx.drawImage(this.image, this.positionX, this.positionY);
         } else {
@@ -25,10 +27,12 @@ class Planet {
         this.attachAnswer(this.answer, this.positionX - 20);
     }
 
-    explode() {
+    explode(withSound) {
         const explosionSound = document.getElementById(`explosion`);
-        explosionSound.play();
         this.state = 'exploded';
+        if (withSound) {
+            explosionSound.play();
+        }
     }
 
     attachAnswer(answer, xPos) {

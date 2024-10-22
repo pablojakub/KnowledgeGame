@@ -15,9 +15,23 @@ class Character {
         return this.position.y >= initialRobotYPosition - 20 && this.position.y <= initialRobotYPosition + 20;
     }
 
+    findPlanet(planets) {
+        planets.forEach((planet) => {
+            console.log(this.position.x);
+            console.log(planet.positionX);
+            console.log(planet.positionXEnd);
 
-    jump(isAscending) {
+            if (this.position.x > planet.positionX && this.position.x < planet.positionXEnd) {
+                checkAnswer(planet.answer, true, planet);
+            }
+        })
+    }
+
+    jump(isAscending, planetBottomYPosition, planets) {
         if (isAscending && this.position.y > 220) {
+            if (this.position.y <= planetBottomYPosition) {
+                this.findPlanet(planets);
+            }
             this.image = this.imagesCollection.jumping;
             this.frame = 60;
             this.velocity = -25;
