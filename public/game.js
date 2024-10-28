@@ -6,8 +6,10 @@ const healthCheckbox = document.getElementById('health');
 const gameBoard = document.getElementById('game');
 const scoreTable = document.getElementById('score-table');
 const backgroundMusic = document.getElementById('backgroundMusic');
+const click = document.getElementById('click');
 const success = document.getElementById('success');
 const errorAnswer = document.getElementById('error-answer');
+const soundButton = document.getElementById('sound-button');
 const ctx = canvas.getContext('2d');
 let questions;
 let currentQuestionNumber;
@@ -15,6 +17,7 @@ let question;
 let secondsLeft = 30;
 let frameNumber = 0;
 let attempts = 0;
+let isSoundEnabled = true;
 const questionsAsked = [];
 
 const image_background = new Image();
@@ -144,6 +147,18 @@ window.addEventListener('keyup', (event) => {
         robot.idle(initialRobotYPosition);
     }
 });
+
+soundButton.addEventListener('click', () => {
+    click.play();
+    isSoundEnabled = !isSoundEnabled;
+    soundButton.classList.toggle('disabled');
+
+    if (isSoundEnabled === false) {
+        backgroundMusic.pause()
+    } else {
+        backgroundMusic.play()
+    }
+})
 
 const getQuestions = async () => {
     const result = await fetch('/get-questions')
@@ -419,5 +434,7 @@ function showError() {
 
 
 function showCorrectAnswerAnimation() {
-    success.play();
+    if (isSoundEnabled) {
+        success.play();
+    }
 }

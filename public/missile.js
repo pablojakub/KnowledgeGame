@@ -8,7 +8,7 @@ class Missile {
     }
 
     fire(positionX, positionY, missileSound) {
-        if (missileSound !== null && this.state === 'deaden') {
+        if (missileSound !== null && this.state === 'deaden' && isSoundEnabled) {
             missileSound.currentTime = 0;
             missileSound.play();
         }

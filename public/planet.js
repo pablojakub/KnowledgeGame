@@ -30,7 +30,7 @@ class Planet {
     explode(withSound) {
         const explosionSound = document.getElementById(`explosion`);
         this.state = 'exploded';
-        if (withSound) {
+        if (withSound && isSoundEnabled) {
             explosionSound.play();
         }
     }

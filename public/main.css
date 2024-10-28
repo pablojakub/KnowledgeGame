@@ -157,7 +157,7 @@ body {
 			hsl(193deg 86% 18%) 73%,
 			hsl(190deg 91% 19%) 80%,
 			hsl(187deg 91% 20%) 88%,
-			hsl(185deg 84% 22%) 100%);
+			#095f67 100%);
 	color: white;
 	border: none;
 	outline: none;
@@ -302,6 +302,30 @@ body {
 	position: relative;
 	top: 100%;
 
+}
+
+.sound_button {
+	position: absolute;
+	width: 30px;
+	top: 30px;
+	left: 385px;
+	display: grid;
+	cursor: pointer;
+	padding: 4px;
+}
+
+.disabled {
+	&::after {
+		content: '';
+		width: 5px;
+		height: 40px;
+		border-radius: 5px;
+		background-color: #095f67;
+		position: absolute;
+		transform: rotate(45deg);
+		top: -6px;
+		left: 10px;
+	}
 }
 
 @keyframes slideDown {

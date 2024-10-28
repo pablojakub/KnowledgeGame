@@ -3,9 +3,13 @@ const rematchBtn = document.getElementById('rematchBtn');
 
 rematchBtn.addEventListener('click', () => {
     //TODO: finish rematch
-    playSound.play();
+    if (isSoundEnabled) {
+        playSound.play();
+    }
     setTimeout(() => {
-        backgroundMusic.play();
+        if (isSoundEnabled) {
+            backgroundMusic.play()
+        };
         gameBoard.style.display = 'block';
         scoreBoard.style.display = 'none';
         showAndAnimateRobot();
