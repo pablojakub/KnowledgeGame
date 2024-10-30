@@ -7,6 +7,9 @@ import path from 'path';
 import fs from 'fs';
 import {shuffleAnswers} from './server/utils.js';
 import {addUserScore} from './server/controllers/usersController.js';
+import 'dotenv/config'
+
+
 
 const app = express();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -64,8 +67,9 @@ app.post('/add-user-score', (req, res, next) => {
             res.status(200).json(userREsults);
         })
         .catch(e => {
-            console.log('🚀 ~ app.post ~ e:', e);
-            res.status(500).json({error: 'Error adding score'})
+            const userName = process.env.USER_NAME;
+            const userPassword = process.env.USER_PASSWORD;
+            res.status(500).json({error: `Error adding score: userName ${userName} and pas: ${userPassword}`})
         });
 });
 
