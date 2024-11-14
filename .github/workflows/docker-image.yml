@@ -1,0 +1,48 @@
+name: Build and Deploy Docker Image
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+  DOCKER_IMAGE_NAME: knowledge-game-app
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Set up Docker Buildx
+      uses: docker-practice/actions-setup-docker@master
+      
+    - name: Build and push Docker image
+      run: |
+        docker buildx build --push \
+          --tag $DOCKER_IMAGE_NAME:${{ github.sha }} \
+          --platform linux/amd64,linux/arm64 \
+          .
+        
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Deploy to DigitalOcean
+      uses: appleboy/ssh-action@master
+      with:
+        username: ${{ secrets.SSH_USERNAME }}
+        key: ${{ secrets.SSH_KEY }}
+        host: ${{ secrets.HOST }}
+        script: |
+          docker pull $DOCKER_IMAGE_NAME:${{ github.sha }}
+          docker run -d -p 80:80 $DOCKER_IMAGE_NAME:${{ github.sha }}
