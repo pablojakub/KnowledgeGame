@@ -12,7 +12,7 @@ jobs:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
         with:
-          platforms: arm64
+          platforms: arm64, amd64
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
@@ -32,4 +32,4 @@ jobs:
           context: .
           push: true
           tags: pablojakub/knowledge-game-app:latest
-          platforms: linux/arm64
+          platforms: linux/amd64,linux/arm64
