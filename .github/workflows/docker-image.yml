@@ -26,4 +26,4 @@ jobs:
     - name: Build and push Docker image
       run: |
           docker build -t pablojakub/knowledge-game-app . 
-          docker push pablojakub/knowledge-game-app:${{ github.sha }}
+          docker push pablojakub/knowledge-game-app
