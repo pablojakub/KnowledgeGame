@@ -25,5 +25,5 @@ jobs:
         
     - name: Build and push Docker image
       run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }} . 
-          docker push ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_PASSWORD }}:${{ github.sha }}
+          docker build -t pablojakub/knowledge-game-app . 
+          docker push pablojakub/knowledge-game-app:${{ github.sha }}
