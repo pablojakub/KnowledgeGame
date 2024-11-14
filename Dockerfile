@@ -6,7 +6,11 @@ WORKDIR /usr/src/knowledgeGame
 
 # Copy package.json and install dependencies
 COPY package.json . 
-RUN npm install
+
+# Clear any pre-existing package-lock.json
+RUN rm -f package-lock.json
+
+RUN npm install --verbose
 
 # Copy all other files
 COPY . .
