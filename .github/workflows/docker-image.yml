@@ -25,5 +25,5 @@ jobs:
         
     - name: Build and push Docker image
       run: |
-          docker build -t $DOCKER_IMAGE_NAME . 
-          docker push $DOCKER_USERNAME/DOCKER_IMAGE_NAME:${{ github.sha }}
+          docker build -t ${{ secrets.DOCKER_USERNAME }} . 
+          docker push ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_PASSWORD }}:${{ github.sha }}
