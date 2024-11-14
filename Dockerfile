@@ -1,5 +1,5 @@
 #!/bin/bash
-FROM node:16.17.1-buster-slim
+FROM node:16.17.1-alpine
 
 # Create and set the correct working directory
 WORKDIR /usr/src/knowledgeGame
