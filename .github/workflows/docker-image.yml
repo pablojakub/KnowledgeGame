@@ -25,5 +25,5 @@ jobs:
         
     - name: Build and push Docker image
       run: |
-          docker build --platform linux/arm/v8  -t pablojakub/knowledge-game-app . 
+          docker build --platform linux/arm64 -t pablojakub/knowledge-game-app . 
           docker push pablojakub/knowledge-game-app
