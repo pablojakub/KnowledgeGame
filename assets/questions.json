@@ -57,6 +57,206 @@
             "C": "To typ przechowywany w heap i jest niemutowalny",
             "D": "To typ przechowywany w stacku i jest niemutowalny"
         },
-        "correctAnswer": "To typ przechowywany w heap i jest mutowalny"
+        "correctAnswer": "To typ przechowywany w heap i jest niemutowalny"
+    },
+    {
+        "questionBody": "Czym jest mantysa",
+        "answers": {
+            "A": "To część ułamkowa liczby zmiennoprzecinkowej",
+            "B": "To część wykładnicza liczby zmiennoprzecinkowej",
+            "C": "To symbol znaku liczby zmiennoprzecinkowej",
+            "D": "To liczba zmiennoprzecinkowa"
+        },
+        "correctAnswer": "To część ułamkowa liczby zmiennoprzecinkowej"
+    },
+    {
+        "questionBody": "Adres 0.0.0.0 oznacza nasłuchiwanie aplikacji",
+        "answers": {
+            "A": "przychodzących pakietów dla dowolnego IP nadawcy",
+            "B": "przychodzących pakietów dla konkretnych IP nadawcy",
+            "C": "wychodzących pakietów dla dowolnego IP nadawcy",
+            "D": "wychodzących pakietów dla konkretnych IP nadawcy"
+        },
+        "correctAnswer": "przychodzących pakietów dla dowolnego IP nadawcy"
+    },
+    {
+        "questionBody": "Maska sieci służy do",
+        "answers": {
+            "A": "określenia, która część adresu IP należy do sieci",
+            "B": "ukrycia lokalnej sieci dla świata zewnętrznego",
+            "C": "ukrycia swojego IP dla lokalnej sieci",
+            "D": "tworzenia podsieci"
+        },
+        "correctAnswer": "określenia, która część adresu IP należy do sieci"
+    },
+    {
+        "questionBody": "Dwa typy do liczb zmiennoprzecinkowych to:",
+        "answers": {
+            "A": "float i double",
+            "B": "string i char",
+            "C": "long i decimal",
+            "D": "int i long"
+        },
+        "correctAnswer": "float i double"
+    },
+    {
+        "questionBody": "Value records w DDD",
+        "answers": {
+            "A": "są mutowalne i można je modyfikować",
+            "B": "są niemutowalne ale można je modyfikować metodami",
+            "C": "są niemutowalne i należy je zastępować w całości",
+            "D": "są mutowalne ale należy je zastępować w całości"
+        },
+        "correctAnswer": "są niemutowalne i należy je zastępować w całości"
+    },
+    {
+        "questionBody": "Direct Access Memory jest to",
+        "answers": {
+            "A": "rodzaj pamięci, która umożliwia jednoczesny dostęp do danych przez wiele procesorów.",
+            "B": "technologia umożliwiająca urządzeniom dostęp do pamięci bez pośrednictwa procesora",
+            "C": "rodzaj pamięci tymczasowej używanej wyłącznie w kartach graficznych",
+            "D": "technika kompresji danych stosowana w pamięciach RAM w celu oszczędności miejsca"
+        },
+        "correctAnswer": "technologia umożliwiająca urządzeniom dostęp do pamięci bez pośrednictwa procesora"
+    },
+    {
+        "questionBody": "Stos to",
+        "answers": {
+            "A": "struktura danych typu LIFO",
+            "B": "struktura danych typu FIFO",
+            "C": "procedury do zarządzania sieciami komputerowymi",
+            "D": "algorytm wykorzystywany do optymalizacji działania procesorów w urządzeniach mobilnych"
+        },
+        "correctAnswer": "struktura danych typu LIFO"
+    },
+    {
+        "questionBody": "Sterta to struktura danych",
+        "answers": {
+            "A": "umożliwiająca szybki dostęp do dowolnego elementu przez jego indeks",
+            "B": "o zmiennym rozmiarze, zarządzanej dynamicznie podczas działania programu",
+            "C": "która działa na zasadzie LIFO",
+            "D": "stosowana m.in. do implementacji kolejek priorytetowych"
+        },
+        "correctAnswer": "o zmiennym rozmiarze, zarządzanej dynamicznie podczas działania programu"
+    },
+    {
+        "questionBody": "Serializacja to proces",
+        "answers": {
+            "A": "kompresji plików w celu oszczędności miejsca na dysku",
+            "B": "przekształcania obiektu w formę umożliwiającą jego zapisanie lub przesłanie",
+            "C": "szyfrowania danych w celu ich zabezpieczenia przed nieautoryzowanym dostępem",
+            "D": "nadawania unikalnych identyfikatorów każdemu procesowi w systemie operacyjnym"
+        },
+        "correctAnswer": "przekształcania obiektu w formę umożliwiającą jego zapisanie lub przesłanie"
+    },
+    {
+        "questionBody": "ConcurrentDictionary to typ w .NET, który",
+        "answers": {
+            "A": "jest thread-safe i nie może być modyfikowany w pętli",
+            "B": "jest thread-safe i może być modyfikowany w pętli",
+            "C": "jest thread-unsafe i może być modyfikowany w pętli",
+            "D": "jest thread-unsafe i nie może być modyfikowany w pętli"
+        },
+        "correctAnswer": "jest thread-safe i nie może być modyfikowany w pętli"
+    },
+    {
+        "questionBody": "Action delegate",
+        "answers": {
+            "A": "przyjmuje argument i nie zwraca wartości",
+            "B": "przyjmuje argument i zwraca wartość",
+            "C": "nie przyjmuje argumentu i nie zwraca wartości",
+            "D": "nie przyjmuje argumentu i zwraca wartość"
+        },
+        "correctAnswer": "przyjmuje argument i nie zwraca wartości"
+    },
+    {
+        "questionBody": "Func delegate",
+        "answers": {
+            "A": "przyjmuje argument i nie zwraca wartości",
+            "B": "przyjmuje argument i zwraca wartość",
+            "C": "nie przyjmuje argumentu i nie zwraca wartości",
+            "D": "nie przyjmuje argumentu i zwraca wartość"
+        },
+        "correctAnswer": "przyjmuje argument i zwraca wartość"
+    },
+    {
+        "questionBody": "Dictionary to typ w .NET, który",
+        "answers": {
+            "A": "jest thread-safe i nie może być modyfikowany w pętli",
+            "B": "jest thread-safe i może być modyfikowany w pętli",
+            "C": "jest thread-unsafe i może być modyfikowany w pętli",
+            "D": "jest thread-unsafe i nie może być modyfikowany w pętli"
+        },
+        "correctAnswer": "jest thread-unsafe i nie może być modyfikowany w pętli"
+    },
+    {
+        "questionBody": "Lookup to typ w .NET, który",
+        "answers": {
+            "A": "posiada kilka wartości per klucz i jest niemutowalny",
+            "B": "posiada kilka wartości per klucz i jest mutowalny",
+            "C": "posiada jedną wartość per klucz i jest niemutowalny",
+            "D": "posiada jedną wartość per klucz i jest mutowalny"
+        },
+        "correctAnswer": "posiada kilka wartości per klucz i jest niemutowalny"
+    },
+    {
+        "questionBody": "Reflection to mechanizm, który",
+        "answers": {
+            "A": "pozwala na dynamiczne uzyskiwanie informacji o typach",
+            "B": "pozwala na tworzenie unit testów na podstawie klasy",
+            "C": "pozwala na uruchamianie aplikacji na różnych OS'ach ",
+            "D": "pozwala na optymalizację wydajności kodu"
+        },
+        "correctAnswer": "pozwala na dynamiczne uzyskiwanie informacji o typach"
+    },
+    {
+        "questionBody": "Metoda do rejestracji serwisu w Dependency Injection to:",
+        "answers": {
+            "A": "Configure",
+            "B": "ConfigureServices",
+            "C": "AddRepositories",
+            "D": "ConfigureSingleton"
+        },
+        "correctAnswer": "ConfigureServices"
+    },
+    {
+        "questionBody": "AddTransient a AddScoped - różnice",
+        "answers": {
+            "A": "AddTransient tworzy instancję per HTTP request a AddScoped nie",
+            "B": "AddScoped tworzy instancję per HTTP request a AddTransient nie",
+            "C": "Instacja z AddTransient jest dostępna przez cały okres trwania aplikacji",
+            "D": "Instacja z AddScoped jest dostępna przez cały okres trwania aplikacji"
+        },
+        "correctAnswer": "AddScoped tworzy instancję per HTTP request a AddTransient nie"
+    },
+    {
+        "questionBody": "Pole w bazie danych to",
+        "answers": {
+            "A": "kolumna w tabelki przechowująca konkretny typ danych",
+            "B": "wiersz w tabeli bazy danych",
+            "C": "zestaw instrukcji SQL do tworzenia tabel w bazie",
+            "D": "mechanizm tworzenia kopii zapasowej"
+        },
+        "correctAnswer": "kolumna w tabelki przechowująca konkretny typ danych"
+    },
+    {
+        "questionBody": "Mutex to mechanizm synchronizacji, który",
+        "answers": {
+            "A": "dopuszcza tylko jeden wątek do sekcji krytycznej zasobu",
+            "B": "nie tworzy sekcji krytycznej zasobu",
+            "C": "dopuszcza wiele wątków do zasobu",
+            "D": "informuje konsumenta zasobu, gdy praca na zasobie zostanie skończona"
+        },
+        "correctAnswer": "dopuszcza tylko jeden wątek do sekcji krytycznej zasobu"
+    },
+    {
+        "questionBody": "Semafor to mechanizm synchronizacji, który",
+        "answers": {
+            "A": "dopuszcza tylko jeden wątek do sekcji krytycznej zasobu",
+            "B": "dopuszcza wątków do sekcji krytycznej zasobu",
+            "C": "nie uwzględnia priorytetyzacji",
+            "D": "informuje konsumenta zasobu, gdy praca na zasobie zostanie skończona"
+        },
+        "correctAnswer": "dopuszcza wątków do sekcji krytycznej zasobu"
     }
 ]
