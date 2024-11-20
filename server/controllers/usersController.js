@@ -4,7 +4,7 @@ import 'dotenv/config'
 const userName = process.env.USER_NAME;
 const userPassword = process.env.USER_PASSWORD;
 
-const uri = `mongodb+srv://${userName}:${userPassword}@cluster0.zjyldhv.mongodb.net/UsersDb?retryWrites=true&w=majority&appName=Cluster0`;
+const uri = `mongodb+srv://${userName}:${userPassword}@cluster0.zjyldhv.mongodb.net/UsersDb?retryWrites=true&w=majority&appName=Cluster0&tlsInsecure=true`;
 const client = new MongoClient(uri);
 
 export const addUserScore = async ({nickName, score, userId}) => {
