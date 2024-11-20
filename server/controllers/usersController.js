@@ -30,7 +30,7 @@ export const addUserScore = async ({nickName, score, userId}) => {
         return userResult;
 
     } catch (e) {
-        console.log('error', e);
+        console.log('error', e.message);
         throw new Error(e.message);
     }
     finally {
