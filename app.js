@@ -9,8 +9,6 @@ import {shuffleAnswers} from './server/utils.js';
 import {addUserScore} from './server/controllers/usersController.js';
 import 'dotenv/config'
 
-
-
 const app = express();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 

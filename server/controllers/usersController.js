@@ -8,6 +8,7 @@ const uri = `mongodb+srv://${userName}:${userPassword}@cluster0.zjyldhv.mongodb.
 const client = new MongoClient(uri);
 
 export const addUserScore = async ({nickName, score, userId}) => {
+    console.log(uri);
     try {
         const database = client.db('UsersDb');
         const usersTable = database.collection('Users');
