@@ -28,6 +28,11 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res, next) => {
+    const userName = process.env.USER_NAME;
+    const userPassword = process.env.USER_PASSWORD;
+    console.log('🚀 ~ app.get ~ userName:', userName);
+    console.log('🚀 ~ app.get ~ userPassword:', userPassword);
+
     res.sendFile('index.html');
 });
 
