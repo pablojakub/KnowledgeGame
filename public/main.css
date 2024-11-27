@@ -139,8 +139,7 @@ main {
 	width: 250px;
 	grid-template-columns: 1fr 1fr;
 	grid-template-rows: repeat(auto-fill, '30px');
-	max-height: 220px;
-	min-height: 220px;
+	height: 200px;
 	overflow-y: auto;
 
 	&>* {
