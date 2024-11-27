@@ -10,6 +10,7 @@ const click = document.getElementById('click');
 const success = document.getElementById('success');
 const errorAnswer = document.getElementById('error-answer');
 const soundButton = document.getElementById('sound-button');
+const githubButton = document.getElementById('github-button');
 const ctx = canvas.getContext('2d');
 let questions;
 let currentQuestionNumber;
@@ -112,6 +113,10 @@ canvas.addEventListener('mousemove', (event) => {
         canvas.style.cursor = 'default';
     }
 });
+
+githubButton.addEventListener('click', () => {
+    window.open('https://github.com/pablojakub/KnowledgeGame', '_blank');
+})
 
 window.addEventListener('keydown', (event) => {
     const canMoving = robot.state === 'idle' || robot.state === 'movingLeft' || robot.state === 'movingRight';
@@ -324,7 +329,7 @@ function checkAnswer(answer, isJumping, planet) {
             currentScore += 1 * secondsLeft;
             score.innerText = currentScore.toString();
             changeQuestion();
-        }, 1000)
+        }, 2000)
     } else {
         planet.explode(true);
         showError();

@@ -7,7 +7,9 @@ import path from 'path';
 import fs from 'fs';
 import {shuffleAnswers} from './server/utils.js';
 import {addUserScore} from './server/controllers/usersController.js';
-import 'dotenv/config'
+import 'dotenv/config';
+import packageJson from './package.json' assert {type: 'json'};
+
 
 const app = express();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -29,6 +31,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res, next) => {
     res.sendFile('index.html');
+});
+
+app.get('/version', (req, res, next) => {
+    console.log(packageJson.version);
+    res.status(200).json({version: packageJson.version});
 });
 
 app.get('/get-questions', (req, res, next) => {

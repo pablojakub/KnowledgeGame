@@ -10,6 +10,14 @@ body {
 	color: #efefef;
 }
 
+main {
+	display: flex;
+	gap: 8px;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
 .board {
 	width: var(--gameWidth);
 	margin: 0 auto;
@@ -92,6 +100,11 @@ body {
 }
 
 .inner_circle {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+
 	border: 1px solid white;
 	border-radius: 5px;
 	background-color: transparent;
@@ -298,12 +311,6 @@ body {
 	justify-content: flex-end;
 }
 
-.info_config {
-	position: relative;
-	top: 100%;
-
-}
-
 .sound_button {
 	position: absolute;
 	width: 30px;
@@ -326,6 +333,23 @@ body {
 		top: -6px;
 		left: 10px;
 	}
+}
+
+.buttons_panel {
+	margin-top: 16px;
+}
+
+.github-button {
+	width: 32px;
+	cursor: pointer;
+	aspect-ratio: 1;
+}
+
+#app-version {
+	margin-top: auto;
+	margin-bottom: 8px;
+	font-size: 0.8rem;
+	color: rgba(255, 255, 255, 0.514);
 }
 
 @keyframes slideDown {

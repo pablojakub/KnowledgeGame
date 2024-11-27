@@ -6,6 +6,13 @@ const playSound = document.getElementById('play');
 
 userInput.value = localStorage.getItem('username') ?? '';
 
+fetch('/version')
+    .then((resp) => resp.json())
+    .then((r) => {
+        document.getElementById('app-version').textContent =
+            'Wersja: ' + r.version;
+    })
+
 playBtn.addEventListener('click', (e) => {
     e.preventDefault();
     e.stopImmediatePropagation();
@@ -13,7 +20,7 @@ playBtn.addEventListener('click', (e) => {
     if (!!userInput.value === true) {
         prepareGame();
     } else {
-        showError(); 
+        showError();
     }
 });
 
