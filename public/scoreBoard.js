@@ -10,8 +10,12 @@ rematchBtn.addEventListener('click', () => {
         if (isSoundEnabled) {
             backgroundMusic.play()
         };
+        resetPlanetState();
         gameBoard.style.display = 'block';
         scoreBoard.style.display = 'none';
+        buttonsPanel.style.display = 'none';
+        score.innerHTML = '0';
+        scorePanel.style.display = 'block';
         showAndAnimateRobot();
     }, 2000);
     getQuestions();

@@ -53,8 +53,8 @@ main {
 .score {
 	color: white;
 	text-align: center;
-	margin-top: 2rem;
 	font-size: 2rem;
+	margin: 0;
 }
 
 #score_board {

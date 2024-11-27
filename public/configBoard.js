@@ -3,6 +3,8 @@ const playBtn = document.getElementById('playBtn');
 const configBoard = document.getElementById('config_board');
 const errorMsg = document.getElementById('errorMsg');
 const playSound = document.getElementById('play');
+const buttonsPanel = document.getElementById('buttons_panel');
+const scorePanel = document.getElementById('score');
 
 userInput.value = localStorage.getItem('username') ?? '';
 
@@ -39,7 +41,10 @@ function prepareGame() {
         backgroundMusic.play();
         getQuestions();
         showAndAnimateRobot();
+        buttonsPanel.style.display = 'none';
+        scorePanel.style.display = 'block';
     }, 2000)
+
 }
 
 function resetError() {

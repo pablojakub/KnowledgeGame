@@ -90,4 +90,8 @@ class Character {
             this.idle();
         }
     }
+
+    waitForAnswer() {
+        this.state = 'waiting';
+    }
 }

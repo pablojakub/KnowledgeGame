@@ -324,12 +324,10 @@ function checkAnswer(answer, isJumping, planet) {
     if (answer === question.correctAnswer) {
         showCorrectAnswerAnimation();
         planet.explode(false);
-        setTimeout(() => {
-            let currentScore = parseInt(score.innerText, 10);
-            currentScore += 1 * secondsLeft;
-            score.innerText = currentScore.toString();
-            changeQuestion();
-        }, 2000)
+        let currentScore = parseInt(score.innerText, 10);
+        currentScore += 1 * secondsLeft;
+        score.innerText = currentScore.toString();
+        changeQuestion();
     } else {
         planet.explode(true);
         showError();
@@ -380,6 +378,8 @@ function showTime() {
 async function showScoreBoard() {
     gameBoard.style.display = 'none';
     scoreBoard.style.display = 'block';
+    buttonsPanel.style.display = 'block';
+    scorePanel.style.display = 'none';
     backgroundMusic.pause();
     backgroundMusic.currentTime = 0;
 
