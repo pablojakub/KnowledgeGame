@@ -3,13 +3,12 @@ import secure from 'express-force-https';
 import helmet from 'helmet';
 import bodyParser from 'body-parser';
 import {fileURLToPath} from 'url';
+import {readFile} from 'fs/promises';
 import path from 'path';
 import fs from 'fs';
 import {shuffleAnswers} from './server/utils.js';
 import {addUserScore} from './server/controllers/usersController.js';
 import 'dotenv/config';
-import packageJson from './package.json';
-
 
 const app = express();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -21,7 +20,7 @@ app.use(helmet.contentSecurityPolicy({
         ],
         "img-src": ["'self'", "default-src 'self'"],
         "frame-src": ["'self'"],
-        "base-uri": "'self'"
+        "base-uri": "'self"
     }
 }));
 app.use(bodyParser.urlencoded({extended: false}));
@@ -30,16 +29,11 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res, next) => {
-    console.log('ruszam');
-    try {
-        res.sendFile('index.html');
-    } catch (e) {
-        console.log(e);
-    }
+    res.sendFile('index.html');
 });
 
-app.get('/version', (req, res, next) => {
-    console.log(packageJson.version);
+app.get('/version', async (req, res, next) => {
+    const packageJson = JSON.parse(await readFile(new URL('./package.json', import.meta.url)));
     res.status(200).json({version: packageJson.version});
 });
 
