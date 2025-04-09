@@ -13,6 +13,7 @@ import 'dotenv/config';
 const app = express();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+app.use(secure);
 app.use(helmet.contentSecurityPolicy({
     directives: {
         "script-src": ["'self'",
@@ -75,7 +76,9 @@ app.post('/add-user-score', (req, res, next) => {
         });
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT);
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
 
 
