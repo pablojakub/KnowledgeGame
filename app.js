@@ -30,7 +30,12 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res, next) => {
-    res.sendFile('index.html');
+    console.log('ruszam');
+    try {
+        res.sendFile('index.html');
+    } catch (e) {
+        console.log(e);
+    }
 });
 
 app.get('/version', (req, res, next) => {
