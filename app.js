@@ -29,6 +29,7 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res, next) => {
+    console.log('Działam');
     res.sendFile('index.html');
 });
 
