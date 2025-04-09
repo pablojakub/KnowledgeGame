@@ -13,7 +13,6 @@ import 'dotenv/config';
 const app = express();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-app.use(secure);
 app.use(helmet.contentSecurityPolicy({
     directives: {
         "script-src": ["'self'",
