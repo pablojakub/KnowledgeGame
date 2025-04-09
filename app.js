@@ -21,7 +21,7 @@ app.use(helmet.contentSecurityPolicy({
         ],
         "img-src": ["'self'", "default-src 'self'"],
         "frame-src": ["'self'"],
-        "base-uri": "http://localhost:3000/"
+        "base-uri": "'self'"
     }
 }));
 app.use(bodyParser.urlencoded({extended: false}));
