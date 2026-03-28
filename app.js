@@ -8,7 +8,7 @@ import fs from 'fs';
 import {shuffleAnswers} from './server/utils.js';
 import {addUserScore} from './server/controllers/usersController.js';
 import 'dotenv/config';
-import packageJson from './package.json' assert {type: 'json'};
+import packageJson from './package.json' with {type: 'json'};
 
 
 const app = express();
