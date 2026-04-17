@@ -7,6 +7,7 @@ const client = new MongoClient(uri);
 export const addUserScore = async ({nickName, score, userId}) => {
     console.log(uri);
     try {
+        await client.connect();
         const database = client.db('UsersDb');
         const usersTable = database.collection('Users');
         const result = await usersTable.insertOne({
@@ -24,6 +25,7 @@ export const addUserScore = async ({nickName, score, userId}) => {
                 })
             }
         }
+        userResult.sort((a, b) => b.score - a.score);
         return userResult;
 
     } catch (e) {
